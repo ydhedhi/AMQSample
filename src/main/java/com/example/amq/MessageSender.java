@@ -9,6 +9,11 @@ import org.apache.log4j.Logger;
 
 import com.example.amq.message.MessageProducer;
 
+/**
+ * Sender class which will concrete the message and send to queue.
+ * @author Yogesh yogeshdhedhi@gmail.com
+ *
+ */
 public class MessageSender {
 	
 	/**
@@ -29,7 +34,6 @@ public class MessageSender {
 	}
 
 	private void sendTextMesage() throws JMSException {
-		//MessageProducer producer = new MessageProducer();
 		logger.debug("sending Text Message to Queue...");
 		messageProducer.sendTextMessage("part.change", "queue", "Hi This is text message");
 		logger.debug("Text message Sent......");

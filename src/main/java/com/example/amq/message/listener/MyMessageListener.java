@@ -10,6 +10,11 @@ import javax.jms.TextMessage;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Listener class which will listening on destination queue for the upcoming message
+ * @author Yogesh yogeshdhedhi@gmail.com
+ *
+ */
 public class MyMessageListener implements MessageListener {
 
   private static final Logger logger = Logger.getLogger(MyMessageListener.class);

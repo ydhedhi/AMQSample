@@ -3,7 +3,8 @@ package com.example.amq;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Hello world!
+ *@author Yogesh yogeshdhedhi@gmail.com
+ * Main class
  *
  */
 public class App 

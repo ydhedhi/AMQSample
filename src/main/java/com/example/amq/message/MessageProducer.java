@@ -21,7 +21,7 @@ import javax.jms.TextMessage;
  * The sent message will have property "message_type" which can be used by the sender
  * and the receiver to decide the message activity.
  *
- * @author Yogesh ydhedhi@entrib.com
+ * @author Yogesh yogeshdhedhi@gmail.com
  */
 
 public class MessageProducer {
