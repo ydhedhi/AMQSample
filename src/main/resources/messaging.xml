@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<import resource="listener.xml"/>
+	
+    <!-- A connection to ActiveMQ -->
+    <bean id="amqConnectionFactory"
+          class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616"/>        
+    </bean>
+
+    <!-- A cached connection to wrap the ActiveMQ connection -->
+    <bean id="cachedConnectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="amqConnectionFactory"/>
+        <property name="sessionCacheSize" value="10"/>
+        <property name="reconnectOnException" value="true"/>
+    </bean>
+
+    <!-- A destination production360queue in ActiveMQ -->
+    <bean id="production360Queue"
+          class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="part.change"/>
+    </bean>
+
+    <!-- A JmsTemplate instance that uses the cached connection and destination -->
+    <bean id="producerTemplate"
+          class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="cachedConnectionFactory"/>
+    </bean>
+
+    <bean id="messageProducer" class="com.example.amq.message.MessageProducer">
+    	<property name="producerTemplate" ref="producerTemplate"/>
+    </bean>
+    
+    <bean id="messageSender" class="com.example.amq.MessageSender" init-method="init">
+    	<property name="messageProducer" ref="messageProducer"/>
+    </bean>
+
+ </beans>
